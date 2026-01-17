@@ -16,7 +16,7 @@ A Claude Code plugin that transforms your workflow to use persistent markdown fi
 [![Claude Code Plugin](https://img.shields.io/badge/Claude%20Code-Plugin-blue)](https://code.claude.com/docs/en/plugins)
 [![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-Skill-green)](https://code.claude.com/docs/en/skills)
 [![Cursor Rules](https://img.shields.io/badge/Cursor-Rules-purple)](https://docs.cursor.com/context/rules-for-ai)
-[![Version](https://img.shields.io/badge/version-2.2.2-brightgreen)](https://github.com/OthmanAdi/planning-with-files/releases)
+[![Version](https://img.shields.io/badge/version-2.3.0-brightgreen)](https://github.com/OthmanAdi/planning-with-files/releases)
 
 ## Quick Install
 
@@ -26,6 +26,16 @@ A Claude Code plugin that transforms your workflow to use persistent markdown fi
 ```
 
 See [docs/installation.md](docs/installation.md) for all installation methods.
+
+## Supported IDEs
+
+| IDE | Status | Installation Guide | Format |
+|-----|--------|-------------------|--------|
+| Claude Code | ✅ Full Support | [Installation](docs/installation.md) | Plugin + SKILL.md |
+| Cursor | ✅ Full Support | [Cursor Setup](docs/cursor.md) | Rules |
+| Kilocode | ✅ Full Support | [Kilocode Setup](docs/kilocode.md) | Rules |
+| OpenCode | ✅ Full Support | [OpenCode Setup](docs/opencode.md) | Personal/Project Skill |
+| Codex | ✅ Full Support | [Codex Setup](docs/codex.md) | Personal Skill |
 
 ## Documentation
 
@@ -38,12 +48,15 @@ See [docs/installation.md](docs/installation.md) for all installation methods.
 | [Cursor Setup](docs/cursor.md) | Cursor IDE-specific instructions |
 | [Windows Setup](docs/windows.md) | Windows-specific notes |
 | [Kilo Code Support](docs/kilocode.md) | Kilo Code integration guide |
+| [Codex Setup](docs/codex.md) | Codex IDE installation and usage |
+| [OpenCode Setup](docs/opencode.md) | OpenCode IDE installation, oh-my-opencode config |
 
 ## Versions
 
 | Version | Features | Install |
 |---------|----------|---------|
-| **v2.2.2** (current) | Restored skill activation language | `/plugin install planning-with-files@planning-with-files` |
+| **v2.3.0** (current) | Codex & OpenCode IDE support | `/plugin install planning-with-files@planning-with-files` |
+| **v2.2.2** | Restored skill activation language | See [releases](https://github.com/OthmanAdi/planning-with-files/releases) |
 | **v2.2.1** | Session recovery after /clear, enhanced PreToolUse hook | See [releases](https://github.com/OthmanAdi/planning-with-files/releases) |
 | **v2.2.0** | Kilo Code IDE support, Windows PowerShell support, OS-aware hooks | See [releases](https://github.com/OthmanAdi/planning-with-files/releases) |
 | **v2.1.2** | Fix template cache issue (Issue #18) | See [releases](https://github.com/OthmanAdi/planning-with-files/releases) |
@@ -162,7 +175,9 @@ planning-with-files/
 │   ├── troubleshooting.md
 │   ├── cursor.md
 │   ├── windows.md
-│   └── kilocode.md
+│   ├── kilocode.md
+│   ├── codex.md
+│   └── opencode.md
 ├── planning-with-files/     # Plugin skill folder
 │   ├── SKILL.md
 │   ├── templates/
@@ -178,6 +193,10 @@ planning-with-files/
 │           ├── check-complete.sh
 │           ├── init-session.ps1   # Windows PowerShell
 │           └── check-complete.ps1 # Windows PowerShell
+├── .codex/                  # Codex IDE installation guide
+│   └── INSTALL.md
+├── .opencode/               # OpenCode IDE installation guide
+│   └── INSTALL.md
 ├── .claude-plugin/          # Plugin manifest
 ├── .cursor/                 # Cursor rules
 ├── .kilocode/               # Kilo Code rules
