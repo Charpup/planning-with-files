@@ -1,56 +1,23 @@
 ---
 name: planning-with-files
-version: "2.3.0"
 description: Implements Manus-style file-based planning for complex tasks. Creates task_plan.md, findings.md, and progress.md. Use when starting complex multi-step tasks, research projects, or any task requiring >5 tool calls. Now with automatic session recovery after /clear.
-user-invocable: true
-allowed-tools:
-  - Read
-  - Write
-  - Edit
-  - Bash
-  - Glob
-  - Grep
-  - WebFetch
-  - WebSearch
-hooks:
-  PreToolUse:
-    - matcher: "Write|Edit|Bash|Read|Glob|Grep"
-      hooks:
-        - type: command
-          command: "cat task_plan.md 2>/dev/null | head -30 || true"
-  PostToolUse:
-    - matcher: "Write|Edit"
-      hooks:
-        - type: command
-          command: "echo '[planning-with-files] File updated. If this completes a phase, update task_plan.md status.'"
-  Stop:
-    - hooks:
-        - type: command
-          command: |
-            if command -v pwsh &> /dev/null && [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" || "$OS" == "Windows_NT" ]]; then
-              pwsh -ExecutionPolicy Bypass -File "${CLAUDE_PLUGIN_ROOT}/scripts/check-complete.ps1" 2>/dev/null || powershell -ExecutionPolicy Bypass -File "${CLAUDE_PLUGIN_ROOT}/scripts/check-complete.ps1" 2>/dev/null || bash "${CLAUDE_PLUGIN_ROOT}/scripts/check-complete.sh"
-            else
-              bash "${CLAUDE_PLUGIN_ROOT}/scripts/check-complete.sh"
-            fi
+license: MIT
+metadata:
+  version: "2.4.0"
+  author: OthmanAdi
+allowed-tools: Read Write Edit Bash Glob Grep WebFetch WebSearch
 ---
 
 # Planning with Files
 
 Work like Manus: Use persistent markdown files as your "working memory on disk."
 
-## FIRST: Check for Previous Session (v2.2.0)
+## FIRST: Check for Previous Session
 
 **Before starting work**, check for unsynced context from a previous session:
 
 ```bash
-# Claude Code users
-python3 ~/.claude/skills/planning-with-files/scripts/session-catchup.py "$(pwd)"
-
-# Codex users
-python3 ~/.codex/skills/planning-with-files/scripts/session-catchup.py "$(pwd)"
-
-# Cursor users
-python3 ~/.cursor/skills/planning-with-files/scripts/session-catchup.py "$(pwd)"
+python3 scripts/session-catchup.py "$(pwd)"
 ```
 
 If catchup report shows unsynced context:
@@ -61,16 +28,12 @@ If catchup report shows unsynced context:
 
 ## Important: Where Files Go
 
-**Templates location (based on your IDE):**
-- Claude Code: `~/.claude/skills/planning-with-files/templates/`
-- Codex: `~/.codex/skills/planning-with-files/templates/`
-- Cursor: `~/.cursor/skills/planning-with-files/templates/`
-
-**Your planning files** go in **your project directory**
+- **Templates** are in `templates/`
+- **Your planning files** go in **your project directory**
 
 | Location | What Goes There |
 |----------|-----------------|
-| Skill directory (`~/.claude/skills/planning-with-files/` or `~/.codex/skills/planning-with-files/`) | Templates, scripts, reference docs |
+| Skill directory | Templates, scripts, reference docs |
 | Your project directory | `task_plan.md`, `findings.md`, `progress.md` |
 
 ## Quick Start
@@ -214,7 +177,7 @@ Helper scripts for automation:
 
 - `scripts/init-session.sh` — Initialize all planning files
 - `scripts/check-complete.sh` — Verify all phases complete
-- `scripts/session-catchup.py` — Recover context from previous session (v2.2.0)
+- `scripts/session-catchup.py` — Recover context from previous session
 
 ## Advanced Topics
 

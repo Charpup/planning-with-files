@@ -2,6 +2,52 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.4.0] - 2026-01-20
+
+### Fixed
+
+- **CRITICAL: Fixed SKILL.md frontmatter to comply with official Agent Skills spec** (Issue #39)
+  - Removed invalid `hooks:` field from SKILL.md frontmatter (not supported by spec)
+  - Removed invalid top-level `version:` field (moved to `metadata.version`)
+  - Removed `user-invocable:` field (not in official spec)
+  - Changed `allowed-tools:` from YAML list to space-delimited string per spec
+  - This fixes `/planning-with-files` slash command not appearing for users
+
+### Changed
+
+- SKILL.md frontmatter now follows [Agent Skills Specification](https://agentskills.io/specification)
+- Version now stored in `metadata.version` field
+- Removed `${CLAUDE_PLUGIN_ROOT}` variable references from SKILL.md (use relative paths)
+- Updated plugin.json to v2.4.0
+
+### Technical Details
+
+The previous SKILL.md used non-standard frontmatter fields:
+```yaml
+# OLD (broken)
+version: "2.3.0"           # NOT supported at top level
+user-invocable: true       # NOT in official spec
+hooks:                     # NOT supported in SKILL.md
+  PreToolUse: ...
+```
+
+Now uses spec-compliant format:
+```yaml
+# NEW (fixed)
+name: planning-with-files
+description: ...
+license: MIT
+metadata:
+  version: "2.4.0"
+  author: OthmanAdi
+allowed-tools: Read Write Edit Bash Glob Grep WebFetch WebSearch
+```
+
+### Thanks
+
+- @wqh17101 for identifying the issue in #39
+- @dalisoft and @zoffyzhang for reporting the problem
+
 ## [2.3.0] - 2026-01-17
 
 ### Added
