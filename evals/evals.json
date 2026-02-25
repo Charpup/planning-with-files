@@ -1,0 +1,56 @@
+{
+  "skill_name": "planning-with-files",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I need to build a new REST API service with user authentication, database integration, unit tests, and deployment pipeline. Help me plan this out so I don't lose progress across sessions.",
+      "expected_output": "Creates task_plan.md with phases (design, auth, DB, tests, deploy), findings.md for research notes, and progress.md for session tracking. Uses filesystem-as-memory pattern.",
+      "assertions": [
+        {
+          "text": "Creates or references task_plan.md",
+          "type": "contains_any",
+          "values": ["task_plan.md", "task_plan", "planning file"]
+        },
+        {
+          "text": "Plan is structured into phases",
+          "type": "llm_judge",
+          "criteria": "The response organizes the work into distinct phases with checkboxes or step markers, not a flat list."
+        },
+        {
+          "text": "Mentions cross-session persistence",
+          "type": "contains_any",
+          "values": ["session", "persist", "findings.md", "progress.md", "context"]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Show me the current status of my planning session.",
+      "expected_output": "Reads existing task_plan.md and progress.md, summarizes completion percentage, what's done, what's next, and any blockers.",
+      "assertions": [
+        {
+          "text": "Reads or references planning files",
+          "type": "contains_any",
+          "values": ["task_plan.md", "progress.md", "findings.md"]
+        },
+        {
+          "text": "Reports completion status",
+          "type": "llm_judge",
+          "criteria": "The response summarizes what tasks are complete and what remains, based on the planning files."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Rename this variable from camelCase to snake_case in my Python file.",
+      "expected_output": "Simple single-step code edit. Skill should NOT trigger — no multi-step planning needed.",
+      "assertions": [
+        {
+          "text": "Does not create planning files for trivial task",
+          "type": "llm_judge",
+          "criteria": "The response performs the rename directly without invoking the planning-with-files workflow or creating task_plan.md."
+        }
+      ]
+    }
+  ]
+}

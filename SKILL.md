@@ -1,6 +1,14 @@
 ---
 name: planning-with-files
 description: File-based planning and progress tracking for complex tasks. Use when starting multi-step projects, needing persistent task tracking across sessions, managing research findings, or preventing context loss. Creates task_plan.md, findings.md, and progress.md for filesystem-as-memory workflow.
+metadata:
+  openclaw:
+    emoji: "📋"
+    requires:
+      bins: []
+      env: []
+    os: ["linux", "macos", "windows"]
+    install: []
 ---
 
 # Planning with Files
