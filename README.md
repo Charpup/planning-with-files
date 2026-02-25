@@ -1,5 +1,15 @@
 # Planning with Files
 
+> **Charpup Fork** — This is [Charpup](https://github.com/Charpup)'s OpenClaw-compliance fork of [OthmanAdi/planning-with-files](https://github.com/OthmanAdi/planning-with-files).
+>
+> **Fork additions (v2.11.0):**
+> - `SKILL.md` — added `metadata.openclaw` block (emoji, requires, os, install) for OpenClaw runtime gating
+> - `evals/evals.json` — 3 skill-creator standard test cases (multi-step plan, status, negative)
+>
+> For the full upstream documentation, features, and IDE support matrix, see the original repo.
+
+---
+
 > **Work like Manus** — the AI agent company Meta acquired for **$2 billion**.
 
 [![Closed Issues](https://img.shields.io/github/issues-closed/OthmanAdi/planning-with-files?color=success)](https://github.com/OthmanAdi/planning-with-files/issues?q=is%3Aissue+is%3Aclosed)
